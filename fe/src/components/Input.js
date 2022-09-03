@@ -17,11 +17,8 @@ export default styled.input`
     border-color: ${({ theme }) => theme.colors.primary.main};
   }
 
-
   ${({ theme, error }) => error && css`
     color: ${theme.colors.danger.main} !important;
     border-color: ${theme.colors.danger.main};
   `}
-
-
 `;

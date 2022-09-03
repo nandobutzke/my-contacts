@@ -21,6 +21,7 @@
     "extensions": [".js", ".jsx"] }],
     "react/react-in-jsx-scope": ["off"],
     "linebreak-style": ["off"],
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "react/jsx-no-bind": ["off"]
   }
 }

@@ -6,7 +6,7 @@ export default function FormGroup({ children, error }) {
   return (
     <Container>
       {children}
-      {error && <small>O formato do e-mail é inválido</small>}
+      {error && <small>{error}</small>}
     </Container>
   );
 }
