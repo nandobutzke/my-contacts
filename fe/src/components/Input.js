@@ -10,6 +10,7 @@ export default styled.input`
   height: 52px;
   outline: none;
   padding: 0 16px;
+  appearance: none;
 
   transition: border-color 0.2s ease-in;
 
