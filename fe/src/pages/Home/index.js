@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import {
   Container, InputSearchContainer, Header, ListContainer, Card,
 } from './styles';
@@ -8,6 +9,22 @@ import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
 
 export default function Home() {
+  const [contacts, setContacts] = useState([]);
+  const [orderBy, setOrderBy] = useState('asc');
+
+  useEffect(() => {
+    fetch(`http://localhost:3333/contacts?orderBy=${orderBy}`)
+      .then(async (response) => {
+        const data = await response.json();
+        setContacts(data);
+      })
+      .catch((error) => console.log('error', error));
+  }, [orderBy]);
+
+  function handleOrderBy() {
+    setOrderBy((prevState) => (prevState === 'asc' ? 'desc' : 'asc'));
+  }
+
   return (
     <Container>
 
@@ -16,37 +33,42 @@ export default function Home() {
       </InputSearchContainer>
 
       <Header>
-        <strong>3 contatos</strong>
+        <strong>
+          {contacts.length}
+          {contacts.length === 1 ? ' contato' : ' contatos'}
+        </strong>
         <Link to="/new">Criar contato</Link>
       </Header>
 
-      <ListContainer>
+      <ListContainer orderBy={orderBy}>
         <header>
-          <button type="button">
+          <button type="button" onClick={handleOrderBy}>
             <span>Nome</span>
             <img src={arrow} alt="Arrow" />
           </button>
         </header>
 
-        <Card>
-          <div className="info">
-            <div className="contact-name">
-              <strong>Fernando Butzke</strong>
-              <small>instagram</small>
+        {contacts.map((contact) => (
+          <Card key={contact.id}>
+            <div className="info">
+              <div className="contact-name">
+                <strong>{contact.name}</strong>
+                {contact.category_name && <small>{contact.category_name}</small>}
+              </div>
+              <span>{contact.email}</span>
+              <span>{contact.phone}</span>
             </div>
-            <span>fernandobutzke1@gmail.com</span>
-            <span>(34) 99999-9999</span>
-          </div>
 
-          <div className="actions">
-            <Link to="/edit/234">
-              <img src={edit} alt="Edit" />
-            </Link>
-            <button type="button">
-              <img src={trash} alt="Trash" />
-            </button>
-          </div>
-        </Card>
+            <div className="actions">
+              <Link to={`/edit/${contact.id}`}>
+                <img src={edit} alt="Edit" />
+              </Link>
+              <button type="button">
+                <img src={trash} alt="Trash" />
+              </button>
+            </div>
+          </Card>
+        ))}
 
       </ListContainer>
     </Container>
