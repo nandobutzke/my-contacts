@@ -6,11 +6,10 @@ import {
 
 import Loader from '../../components/Loader';
 
-import delay from '../../utils/delay';
-
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
+import ContactsService from '../../services/ContactsService';
 
 export default function Home() {
   const [contacts, setContacts] = useState([]);
@@ -23,24 +22,19 @@ export default function Home() {
   )), [contacts, searchTerm]);
 
   useEffect(() => {
-    setIsLoading(true);
-
     (async () => {
       try {
-        await delay(500);
+        setIsLoading(true);
 
-        const response = await fetch(`http://localhost:3333/contacts?orderBy=${orderBy}`);
+        const contactsList = await ContactsService.loadContacts(orderBy);
 
-        const data = await response.json();
-        setContacts(data);
+        setContacts(contactsList);
       } catch (error) {
         console.log('error', error);
       } finally {
         setIsLoading(false);
       }
     })();
-
-    return () => console.log('cleanup');
   }, [orderBy]);
 
   function handleOrderBy() {
