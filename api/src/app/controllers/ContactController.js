@@ -47,7 +47,7 @@ class ContactController {
       name, email, phone, category_id,
     });
 
-    response.json(contact);
+    response.status(201).json(contact);
   }
 
   async update(request, response) {

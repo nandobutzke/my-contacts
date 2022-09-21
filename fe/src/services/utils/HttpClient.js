@@ -12,12 +12,6 @@ class HttpClient {
 
     return response.json();
   }
-
-  async post(path, contact) {
-    await fetch(path);
-
-    console.log(contact);
-  }
 }
 
 export default HttpClient;
