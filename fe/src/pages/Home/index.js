@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useMemo, useState } from 'react';
 import {
-  Container, InputSearchContainer, Header, ListContainer, Card,
+  Container, InputSearchContainer, Header, ListContainer, Card, ErrorContainer,
 } from './styles';
 
 import Loader from '../../components/Loader';
@@ -9,13 +9,17 @@ import Loader from '../../components/Loader';
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
+import sad from '../../assets/images/sad.svg';
 import ContactsService from '../../services/ContactsService';
+
+import Button from '../../components/Button';
 
 export default function Home() {
   const [contacts, setContacts] = useState([]);
   const [orderBy, setOrderBy] = useState('asc');
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
   const filteredContacts = useMemo(() => contacts.filter((contact) => (
     contact.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -30,7 +34,7 @@ export default function Home() {
 
         setContacts(contactsList);
       } catch (error) {
-        console.log(error);
+        setHasError(true);
       } finally {
         setIsLoading(false);
       }
@@ -57,13 +61,25 @@ export default function Home() {
         />
       </InputSearchContainer>
 
-      <Header>
-        <strong>
-          {filteredContacts.length}
-          {filteredContacts.length === 1 ? ' contato' : ' contatos'}
-        </strong>
+      <Header hasError={hasError}>
+        {!hasError && (
+          <strong>
+            {filteredContacts.length}
+            {filteredContacts.length === 1 ? ' contato' : ' contatos'}
+          </strong>
+        )}
         <Link to="/new">Criar contato</Link>
       </Header>
+
+      {hasError && (
+        <ErrorContainer>
+          <img src={sad} alt="Error Sad Face" />
+          <div>
+            <span>Ocorreu um erro ao obter os seus contatos!</span>
+            <Button>Tentar novamente</Button>
+          </div>
+        </ErrorContainer>
+      )}
 
       <ListContainer orderBy={orderBy}>
         {filteredContacts.length > 0 && (

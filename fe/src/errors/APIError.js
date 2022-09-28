@@ -1,7 +1,10 @@
 export default class APIError extends Error {
-  constructor(message) {
-    super(message);
+  constructor(body, response) {
+    super();
 
     this.name = 'APIError';
+    this.response = response;
+    this.body = body;
+    this.message = body?.error || `${response.status} - ${response.statusText}`;
   }
 }
