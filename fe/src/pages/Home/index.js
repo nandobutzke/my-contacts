@@ -1,9 +1,11 @@
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable no-nested-ternary */
 import { Link } from 'react-router-dom';
 import {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
 import {
-  Container, InputSearchContainer, Header, ListContainer, Card, ErrorContainer,
+  Container, InputSearchContainer, Header, ListContainer, Card, ErrorContainer, EmptyListContainer,
 } from './styles';
 
 import Loader from '../../components/Loader';
@@ -12,6 +14,8 @@ import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
 import sad from '../../assets/images/sad.svg';
+import emptyBox from '../../assets/images/empty-box.svg';
+
 import ContactsService from '../../services/ContactsService';
 
 import Button from '../../components/Button';
@@ -57,17 +61,27 @@ export default function Home() {
   return (
     <Container>
       <Loader isLoading={isLoading} />
-      <InputSearchContainer>
-        <input
-          value={searchTerm}
-          type="text"
-          placeholder="Pesquise pelo nome..."
-          onChange={handleChangeSearch}
-        />
-      </InputSearchContainer>
+      {contacts.length > 0 && (
+        <InputSearchContainer>
+          <input
+            value={searchTerm}
+            type="text"
+            placeholder="Pesquise pelo nome..."
+            onChange={handleChangeSearch}
+          />
+        </InputSearchContainer>
+      )}
 
-      <Header hasError={hasError}>
-        {!hasError && (
+      <Header
+        justifyContent={(
+          hasError
+            ? 'flex-end'
+            : (contacts.length > 0
+              ? 'space-between'
+              : 'center')
+        )}
+      >
+        {(!hasError && contacts.length > 0) && (
           <strong>
             {filteredContacts.length}
             {filteredContacts.length === 1 ? ' contato' : ' contatos'}
@@ -87,39 +101,53 @@ export default function Home() {
       )}
 
       {!hasError && (
-        <ListContainer orderBy={orderBy}>
-          {filteredContacts.length > 0 && (
-          <header>
-            <button type="button" onClick={handleOrderBy}>
-              <span>Nome</span>
-              <img src={arrow} alt="Arrow" />
-            </button>
-          </header>
+        <>
+          {(contacts.length < 1 && !isLoading) && (
+            <EmptyListContainer>
+              <img src={emptyBox} alt="Empty Box" />
+              <p>
+                Você ainda não tem nenhum contato cadastrado!
+                Clique no botão <strong>”Novo contato”</strong> à cima para cadastrar
+                o seu primeiro!
+              </p>
+            </EmptyListContainer>
           )}
 
-          {filteredContacts.map((contact) => (
-            <Card key={contact.id}>
-              <div className="info">
-                <div className="contact-name">
-                  <strong>{contact.name}</strong>
-                  {contact.category_name && <small>{contact.category_name}</small>}
+          <ListContainer orderBy={orderBy}>
+            {filteredContacts.length > 0 && (
+            <header>
+              <button type="button" onClick={handleOrderBy}>
+                <span>Nome</span>
+                <img src={arrow} alt="Arrow" />
+              </button>
+            </header>
+            )}
+
+            {filteredContacts.map((contact) => (
+              <Card key={contact.id}>
+                <div className="info">
+                  <div className="contact-name">
+                    <strong>{contact.name}</strong>
+                    {contact.category_name && <small>{contact.category_name}</small>}
+                  </div>
+                  <span>{contact.email}</span>
+                  <span>{contact.phone}</span>
                 </div>
-                <span>{contact.email}</span>
-                <span>{contact.phone}</span>
-              </div>
 
-              <div className="actions">
-                <Link to={`/edit/${contact.id}`}>
-                  <img src={edit} alt="Edit" />
-                </Link>
-                <button type="button">
-                  <img src={trash} alt="Trash" />
-                </button>
-              </div>
-            </Card>
-          ))}
+                <div className="actions">
+                  <Link to={`/edit/${contact.id}`}>
+                    <img src={edit} alt="Edit" />
+                  </Link>
+                  <button type="button">
+                    <img src={trash} alt="Trash" />
+                  </button>
+                </div>
+              </Card>
+            ))}
 
-        </ListContainer>
+          </ListContainer>
+        </>
+
       )}
 
     </Container>
