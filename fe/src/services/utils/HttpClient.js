@@ -1,4 +1,5 @@
 import APIError from '../../errors/APIError';
+import delay from '../../utils/delay';
 
 class HttpClient {
   constructor(baseUrl) {
@@ -6,6 +7,8 @@ class HttpClient {
   }
 
   async get(path) {
+    await delay(4000);
+
     const response = await fetch(`${this.baseURL}${path}`);
 
     const contentType = response.headers.get('Content-Type');
