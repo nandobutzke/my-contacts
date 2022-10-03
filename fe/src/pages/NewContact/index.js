@@ -5,12 +5,16 @@ import ContactsService from '../../services/ContactsService';
 
 export default function NewContact() {
   async function handleSubmit(formData) {
-    const response = await ContactsService.createContact({
-      ...formData,
-      category_id: formData.categoryId,
-    });
+    try {
+      const response = await ContactsService.createContact({
+        ...formData,
+        category_id: formData.categoryId,
+      });
 
-    console.log(response);
+      console.log(response);
+    } catch {
+      alert('Esse e-mail já está sendo usado');
+    }
   }
 
   return (
