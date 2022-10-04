@@ -31,8 +31,6 @@ class HttpClient {
 
     if (options.headers) {
       Object.entries(options.headers).forEach(([key, value]) => {
-        console.log(options.headers);
-
         headers.append(key, value);
       });
     }
