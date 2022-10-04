@@ -12,10 +12,6 @@ class ContactsService {
   async createContact(contact) {
     return this.httpClient.post('/contacts', {
       body: contact,
-      headers: {
-        Authorization: 'teste',
-        OutroHeader: 'header',
-      },
     });
   }
 }
