@@ -2,18 +2,25 @@ import PageHeader from '../../components/PageHeader';
 
 import ContactForm from '../../components/ContactForm';
 import ContactsService from '../../services/ContactsService';
+import toast from '../../utils/toast';
 
 export default function NewContact() {
   async function handleSubmit(formData) {
     try {
-      const response = await ContactsService.createContact({
+      await ContactsService.createContact({
         ...formData,
         category_id: formData.categoryId,
       });
 
-      console.log(response);
+      toast({
+        type: 'success',
+        text: 'O contato foi cadastrado com sucesso!',
+      });
     } catch {
-      alert('Esse e-mail já está sendo usado');
+      toast({
+        type: 'danger',
+        text: 'Ocorreu um erro ao criar o contato!',
+      });
     }
   }
 

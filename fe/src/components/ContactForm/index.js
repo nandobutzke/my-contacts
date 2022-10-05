@@ -72,7 +72,10 @@ export default function ContactForm({ buttonLabel, onSubmit }) {
     setIsSubmitting(true);
 
     await onSubmit({
-      name, email, phone: phone.replace(/\D/g, ''), categoryId,
+      name,
+      email,
+      phone: phone.replace(/\D/g, ''),
+      categoryId,
     });
 
     setIsSubmitting(false);

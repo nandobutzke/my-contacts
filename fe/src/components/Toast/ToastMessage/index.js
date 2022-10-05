@@ -16,7 +16,7 @@ export function ToastMessage({ text, type }) {
 
 ToastMessage.propTypes = {
   text: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['default', 'success', 'error']),
+  type: PropTypes.oneOf(['default', 'success', 'danger']),
 };
 
 ToastMessage.defaultProps = {
