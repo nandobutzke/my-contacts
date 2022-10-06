@@ -10,8 +10,6 @@ import Routes from '../../Routes';
 import { ToastContainer } from '../Toast/ToastContainer';
 
 function App() {
-  console.log('App rendered');
-
   return (
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
