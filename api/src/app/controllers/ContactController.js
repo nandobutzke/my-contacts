@@ -42,7 +42,7 @@ class ContactController {
       name, email, phone, category_id,
     } = request.body;
 
-    if (!isValidUUID(category_id)) {
+    if (category_id && !isValidUUID(category_id)) {
         return response.status(400).json({ error: 'Invalid category UUID.' });
     }
 
