@@ -9,6 +9,7 @@ import toast from '../../utils/toast';
 
 export default function Edit() {
   const [isLoading, setIsLoading] = useState(true);
+  const [contactName, setContactName] = useState('');
 
   const contactFormRef = useRef();
   const { id } = useParams();
@@ -17,10 +18,11 @@ export default function Edit() {
   useEffect(() => {
     async function loadContact() {
       try {
-        const contactData = await ContactsService.getContactById(id);
+        const contact = await ContactsService.getContactById(id);
 
         setIsLoading(false);
-        contactFormRef.current.setFieldValues(contactData);
+        contactFormRef.current.setFieldValues(contact);
+        setContactName(contact.name);
       } catch {
         history.push('/');
         toast({
@@ -33,8 +35,25 @@ export default function Edit() {
     loadContact();
   }, [id, history]);
 
-  function handleSubmit() {
-    //
+  async function handleSubmit(formData) {
+    try {
+      const { name } = await ContactsService.updateContact(id, {
+        ...formData,
+        category_id: formData.categoryId,
+      });
+
+      setContactName(name);
+
+      toast({
+        type: 'success',
+        text: 'O contato foi cadastrado com sucesso!',
+      });
+    } catch {
+      toast({
+        type: 'danger',
+        text: 'Ocorreu um erro ao criar o contato!',
+      });
+    }
   }
 
   return (
@@ -42,7 +61,7 @@ export default function Edit() {
       <Loader isLoading={isLoading} />
 
       <PageHeader
-        title="Editar Fernando Butzke"
+        title={isLoading ? 'Carregando...' : `Editar ${contactName}`}
       />
 
       <ContactForm
