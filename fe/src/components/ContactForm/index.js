@@ -49,6 +49,12 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
       setPhone(formatPhone(contact.phone ?? ''));
       setCategoryId(contact.category_id ?? '');
     },
+    resetValues: () => {
+      setName('');
+      setEmail('');
+      setPhone('');
+      setCategoryId('');
+    },
   }), []);
 
   const isFormValid = (name && errors.length === 0);
