@@ -6,13 +6,13 @@ class HttpClient {
     this.baseURL = baseUrl;
   }
 
-  async get(path) {
+  get(path) {
     return this.makeRequest(path, {
       method: 'GET',
     });
   }
 
-  async post(path, options) {
+  post(path, options) {
     return this.makeRequest(path, {
       method: 'POST',
       body: options?.body,
@@ -20,7 +20,7 @@ class HttpClient {
     });
   }
 
-  async put(path, options) {
+  put(path, options) {
     return this.makeRequest(path, {
       method: 'PUT',
       body: options?.body,
@@ -28,9 +28,16 @@ class HttpClient {
     });
   }
 
-  async makeRequest(path, options) {
-    await delay(500);
+  async delete(path, options) {
+    await delay(5000);
 
+    return this.makeRequest(path, {
+      method: 'DELETE',
+      headers: options?.headers,
+    });
+  }
+
+  async makeRequest(path, options) {
     const headers = new Headers();
 
     if (options.body) {
@@ -52,7 +59,7 @@ class HttpClient {
     const contentType = response.headers.get('Content-Type');
 
     let responseBody = null;
-    if (contentType.includes('application/json')) {
+    if (contentType?.includes('application/json')) {
       responseBody = await response.json();
     }
 
