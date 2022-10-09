@@ -7,7 +7,7 @@ export const Overlay = styled.div`
 
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(3px);
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
@@ -17,8 +17,6 @@ export const Overlay = styled.div`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  //justify-content: space-between;
-  //height: 200px;
 
   max-width: 450px;
   padding: 24px;
@@ -27,14 +25,13 @@ export const Container = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.04);
   border-radius: 4px;
 
-  strong {
+  > strong {
     font-size: 22px;
     color: ${({ theme, danger }) => danger && theme.colors.danger.main};
   }
 
-  small {
-    margin-top: 8px;
-    font-size: 16px;
+  .modal-body {
+    margin-top: 32px;
   }
 `;
 
@@ -45,11 +42,10 @@ export const Footer = styled.footer`
   align-items: center;
   justify-content: end;
 
-  gap: 8px;
-
   .cancel-button {
     background: none;
     border: none;
+    margin-right: 24px;
 
     font-size: 16px;
 

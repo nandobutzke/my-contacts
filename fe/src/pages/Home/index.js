@@ -21,6 +21,7 @@ import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 import ContactsService from '../../services/ContactsService';
 
 import Button from '../../components/Button';
+import Modal from '../../components/Modal';
 
 export default function Home() {
   const [contacts, setContacts] = useState([]);
@@ -63,6 +64,16 @@ export default function Home() {
   return (
     <Container>
       <Loader isLoading={isLoading} />
+
+      <Modal
+        danger
+        title="Tem certeza que deseja remover o contato ”Fernando Butzke”?"
+        onCancel={() => alert('cancelou')}
+        onConfirm={() => alert('confirmou')}
+      >
+        conteúdo do modal
+      </Modal>
+
       {contacts.length > 0 && (
         <InputSearchContainer>
           <input
