@@ -8,6 +8,7 @@ import { Header } from '../Header';
 
 import Routes from '../../Routes';
 import { ToastContainer } from '../Toast/ToastContainer';
+import NavBar from '../NavBar';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Container>
           <ToastContainer />
 
+          <NavBar />
           <Header />
           <Routes />
         </Container>

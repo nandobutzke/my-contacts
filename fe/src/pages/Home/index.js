@@ -20,6 +20,7 @@ import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 
 import ContactsService from '../../services/ContactsService';
 import toast from '../../utils/toast';
+import formatPhone from '../../utils/formatPhone';
 
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
@@ -143,7 +144,7 @@ export default function Home() {
             {filteredContacts.length === 1 ? ' contato' : ' contatos'}
           </strong>
         )}
-        <Link to="/new">Criar contato</Link>
+        <Link to="/new-contact">Criar contato</Link>
       </Header>
 
       {hasError && (
@@ -195,11 +196,11 @@ export default function Home() {
                     {contact.category_name && <small>{contact.category_name}</small>}
                   </div>
                   <span>{contact.email}</span>
-                  <span>{contact.phone}</span>
+                  <span>{formatPhone(contact.phone)}</span>
                 </div>
 
                 <div className="actions">
-                  <Link to={`/edit/${contact.id}`}>
+                  <Link to={`/edit-contact/${contact.id}`}>
                     <img src={edit} alt="Edit" />
                   </Link>
                   <button type="button" onClick={() => handleOpenDeleteModal(contact)}>
