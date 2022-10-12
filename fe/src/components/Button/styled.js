@@ -14,7 +14,7 @@ export const StyledButton = styled.button`
   align-items: center;
   justify-content: center;
 
-  transition: background 0.2s ease-in;
+  transition: all 0.2s ease-in;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.primary.light};
@@ -25,7 +25,8 @@ export const StyledButton = styled.button`
   }
 
   &[disabled] {
-    background-color: #ccc !important;
+    background-color: ${({ theme }) => theme.mode.buttonDisabledColor} !important;
+    color: ${({ theme }) => theme.mode.textDisabledColor} !important;
     cursor: default !important;
   }
 

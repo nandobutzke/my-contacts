@@ -8,7 +8,7 @@ export const InputSearchContainer = styled.div`
   width: 100%;
 
   input {
-    background: ${({ theme }) => theme.mode.inputSearchColor};
+    background: ${({ theme }) => theme.mode.inputColor};
     color: ${({ theme }) => theme.mode.textColor};
 
     width: 100%;
@@ -20,6 +20,8 @@ export const InputSearchContainer = styled.div`
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 
     outline: 0;
+
+    transition: all 0.2s ease-in;
 
     &::placeholder {
       color: ${({ theme }) => theme.colors.gray[200]};
@@ -33,12 +35,18 @@ export const Header = styled.header`
   justify-content: ${({ justifyContent }) => justifyContent};
   padding-bottom: 16px;
 
-  border-bottom: 2px solid ${({ theme }) => theme.colors.gray[100]};
+  border-bottom: 2px solid ${({ theme }) => theme.mode.headerBorderBottomColor};
 
   margin-top: 32px;
 
+  transition: all 0.2s ease-in;
+
   strong {
+    color: ${({ theme }) => theme.mode.textColor};
+
     font-size: 24px;
+
+    transition: color 0.2s ease-in;
   }
 
   a {
@@ -55,13 +63,14 @@ export const Header = styled.header`
 
     &:hover {
       background-color: #5061FC;
-      color: ${({ theme }) => theme.colors.background};
+      color: ${({ theme }) => theme.colors.white};
     }
   }
 `;
 
 export const ListContainer = styled.div`
   margin-top: 24px;
+  margin-bottom: 16px;
 
   header {
     margin-bottom: 16px;
@@ -97,6 +106,8 @@ export const Card = styled.div`
   padding: 16px;
   border-radius: 4px;
 
+  transition: all 0.2s ease-in;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -113,8 +124,10 @@ export const Card = styled.div`
       gap: 8px;
 
       small {
-        color: ${({ theme }) => theme.colors.primary.lighter};
-        background: ${({ theme }) => theme.colors.primary.dark};
+        transition: all 0.2s ease-in;
+
+        color: ${({ theme }) => theme.mode.categorySmallColor};
+        background: ${({ theme }) => theme.mode.categorySmallBackground};
 
         text-transform: uppercase;
         font-weight: bold;

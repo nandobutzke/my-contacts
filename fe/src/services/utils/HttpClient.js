@@ -5,7 +5,7 @@ class HttpClient {
     this.baseURL = baseUrl;
   }
 
-  get(path) {
+  async get(path) {
     return this.makeRequest(path, {
       method: 'GET',
     });

@@ -19,8 +19,6 @@ function App() {
     setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
   }
 
-  console.log(theme);
-
   const defaultTheme = {
     colors,
     mode: themes[theme] || themes.light,

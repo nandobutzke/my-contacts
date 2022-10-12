@@ -2,23 +2,22 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
 
-  label {
-    width: 40px;
-    height: 20px;
-    background: ${({ theme }) => theme.colors.primary.main};
-    border-radius: 50px;
-    position: relative;
-    transform: scale(1.5);
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
+  input[type="checkbox"] {
+    position: absolute;
   }
 
-  input[type="checkbox"] {
-    opacity: 0;
-    position: absolute;
+  label {
+    display: flex;
+
+    width: 35px;
+    height: 20px;
+    background: ${({ theme }) => theme.colors.primary.main};
+    position: relative;
+    border-radius: 50px;
+
+    transform: scale(1.25);
+
+    cursor: pointer;
   }
 
   .toggle-ball {
@@ -33,6 +32,6 @@ export const Container = styled.div`
   }
 
   .checkbox:checked + label .toggle-ball {
-    transform: translateX(20px);
+    transform: translateX(16px);
   }
 `;

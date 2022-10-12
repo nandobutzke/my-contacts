@@ -18,4 +18,5 @@ export default {
   success: {
     main: '#51CA73',
   },
+  white: '#FFFFFF',
 };

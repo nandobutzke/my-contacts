@@ -14,7 +14,6 @@ export const Container = styled.div`
       font-weight: bold;
     }
 
-
     gap: 8px;
 
     img {
@@ -23,6 +22,10 @@ export const Container = styled.div`
   }
 
   h1 {
+    transition: all 0.2s ease-in;
+
+    color: ${({ theme }) => theme.mode.textColor};
+
     font-size: 24px;
   }
 `;

@@ -15,6 +15,8 @@ export const Svg = styled.svg`
   height: 34.04px;
 
   path:last-child {
+    transition: fill 0.2s linear;
+
     fill: ${({ theme }) => theme.mode.logoColor};
   }
 `;
