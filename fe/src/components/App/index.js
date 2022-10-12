@@ -1,6 +1,8 @@
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter } from 'react-router-dom';
-import defaultTheme from '../../assets/styles/themes/default';
+import { useState } from 'react';
+import themes from '../../assets/styles/themes';
+import colors from '../../assets/styles/themes/default';
 
 import GlobalStyle from '../../assets/styles/global';
 import { Container } from './styles';
@@ -11,6 +13,19 @@ import { ToastContainer } from '../Toast/ToastContainer';
 import NavBar from '../NavBar';
 
 function App() {
+  const [theme, setTheme] = useState('light');
+
+  function handleToggleTheme() {
+    setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
+  }
+
+  console.log(theme);
+
+  const defaultTheme = {
+    colors,
+    mode: themes[theme] || themes.light,
+  };
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
@@ -18,7 +33,7 @@ function App() {
         <Container>
           <ToastContainer />
 
-          <NavBar />
+          <NavBar onToggleTheme={handleToggleTheme} />
           <Header />
           <Routes />
         </Container>

@@ -1,13 +1,18 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import PropTypes from 'prop-types';
 import { Container } from './styles';
 
-/* eslint-disable jsx-a11y/label-has-associated-control */
-export default function ToggleThemeButton() {
+export default function ToggleThemeButton({ onToggleTheme }) {
   return (
     <Container>
-      <input type="checkbox" className="checkbox" id="checkbox" />
+      <input type="checkbox" className="checkbox" id="checkbox" onClick={onToggleTheme} />
       <label htmlFor="checkbox">
         <div className="toggle-ball" />
       </label>
     </Container>
   );
 }
+
+ToggleThemeButton.propTypes = {
+  onToggleTheme: PropTypes.func.isRequired,
+};

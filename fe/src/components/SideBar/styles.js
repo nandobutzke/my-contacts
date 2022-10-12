@@ -15,20 +15,22 @@ export const Container = styled.div`
   padding: 16px;
   width: 75%;
 
-  background: ${({ theme }) => theme.colors.background};
+  background: ${({ theme }) => theme.mode.sideBarBackgroundColor};
 
   svg {
     color: ${({ theme }) => theme.colors.primary.main};
     cursor: pointer;
   }
 
-  div {
+  nav {
     display: flex;
     flex-direction: column;
 
     padding: 0 24px;
 
-    margin-top: 32px;
+    margin-top: 64px;
+
+    font-size: 24px;
 
     a {
       text-decoration: none;
@@ -42,6 +44,8 @@ export const Container = styled.div`
 
       svg {
         margin-right: 16px;
+
+        font-size: 32px;
       }
     }
   }

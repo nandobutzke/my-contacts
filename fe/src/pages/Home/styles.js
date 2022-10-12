@@ -8,7 +8,8 @@ export const InputSearchContainer = styled.div`
   width: 100%;
 
   input {
-    background: #fff;
+    background: ${({ theme }) => theme.mode.inputSearchColor};
+    color: ${({ theme }) => theme.mode.textColor};
 
     width: 100%;
     height: 50px;
@@ -90,7 +91,8 @@ export const ListContainer = styled.div`
 `;
 
 export const Card = styled.div`
-  background: #fff;
+  background: ${({ theme }) => theme.mode.contactCardBackground};
+  color: ${({ theme }) => theme.mode.textColor};
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.04);
   padding: 16px;
   border-radius: 4px;
@@ -111,8 +113,8 @@ export const Card = styled.div`
       gap: 8px;
 
       small {
-        color: ${({ theme }) => theme.colors.primary.main};
-        background: ${({ theme }) => theme.colors.primary.lighter};
+        color: ${({ theme }) => theme.colors.primary.lighter};
+        background: ${({ theme }) => theme.colors.primary.dark};
 
         text-transform: uppercase;
         font-weight: bold;

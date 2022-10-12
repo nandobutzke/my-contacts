@@ -4,40 +4,27 @@ import { BiCategoryAlt } from 'react-icons/bi';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import { useEffect } from 'react';
 import ReactPortal from '../ReactPortal';
 import { Container, Overlay } from './styles';
 
 export default function SideBar({ onShowSideBar }) {
-  useEffect(() => {
-    const teste = 0;
-
-    console.log(teste);
-
-    document.addEventListener('onclick', onShowSideBar);
-
-    return () => {
-      document.removeEventListener('onclick', onShowSideBar);
-    };
-  }, [onShowSideBar]);
-
   return (
     <ReactPortal containerId="sidebar-root">
       <Overlay>
         <Container>
           <header>
-            <AiOutlineCloseCircle size={32} onClick={() => onShowSideBar()} />
+            <AiOutlineCloseCircle size={32} onClick={onShowSideBar} />
           </header>
-          <div>
+          <nav>
             <Link to="/">
-              <AiOutlineContacts size={24} />
+              <AiOutlineContacts />
               <span>Contatos</span>
             </Link>
             <Link to="/categories">
-              <BiCategoryAlt size={24} />
+              <BiCategoryAlt />
               <span>Categorias</span>
             </Link>
-          </div>
+          </nav>
         </Container>
       </Overlay>
     </ReactPortal>
