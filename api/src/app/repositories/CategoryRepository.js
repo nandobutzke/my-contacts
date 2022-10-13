@@ -4,7 +4,12 @@ class CategoryRepository {
   async findAll(orderBy = 'ASC') {
     const direction = orderBy.toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
 
-    const row = await db.query(`SELECT * FROM categories ORDER BY name ${direction}`);
+    const row = await db.query(`
+    SELECT categories.*, COUNT(contacts.*) AS contacts_count
+    FROM categories
+    LEFT JOIN contacts ON contacts.category_id = categories.id
+    GROUP BY categories.id, categories.name
+    ORDER BY categories.name ${direction}`);
 
     return row;
   }
@@ -22,6 +27,16 @@ class CategoryRepository {
   async findById(id) {
     const [row] = await db.query(`
         SELECT * FROM categories WHERE id = $1
+    `, [id]);
+
+    return row;
+  }
+
+  async getAllContacts(id) {
+    const [row] = await db.query(`
+        SELECT COUNT(*)
+        FROM contacts
+        WHERE category_id = $1
     `, [id]);
 
     return row;
