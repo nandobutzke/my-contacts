@@ -8,7 +8,7 @@ import Loader from '../../components/Loader';
 import toast from '../../utils/toast';
 import useSafeAsyncAction from '../../hooks/useSafeAsyncAction';
 
-export default function Edit() {
+export default function EditContact() {
   const [isLoading, setIsLoading] = useState(true);
   const [contactName, setContactName] = useState('');
 

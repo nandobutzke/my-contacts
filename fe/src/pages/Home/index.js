@@ -5,7 +5,7 @@ import {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
 import {
-  Container, InputSearchContainer, Header, ListContainer, Card,
+  Container, Header, ListContainer, Card,
   ErrorContainer, EmptyListContainer, SearchNotFoundContainer,
 } from './styles';
 
@@ -24,6 +24,7 @@ import formatPhone from '../../utils/formatPhone';
 
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
+import InputSearch from '../../components/InputSearch';
 
 export default function Home() {
   const [contacts, setContacts] = useState([]);
@@ -119,14 +120,10 @@ export default function Home() {
       </Modal>
 
       {contacts.length > 0 && (
-        <InputSearchContainer>
-          <input
-            value={searchTerm}
-            type="text"
-            placeholder="Pesquise pelo nome..."
-            onChange={handleChangeSearch}
-          />
-        </InputSearchContainer>
+        <InputSearch
+          searchTerm={searchTerm}
+          handleChangeSearch={handleChangeSearch}
+        />
       )}
 
       <Header
