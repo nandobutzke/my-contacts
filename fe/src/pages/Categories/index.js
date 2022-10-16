@@ -62,7 +62,7 @@ export default function Categories() {
       >
         <strong>
           {filteredCategories.length}
-          {filteredCategories.length > 1 || filteredCategories.length === 0 ? ' categorias' : ' categoria'}
+          {filteredCategories.length === 1 ? ' categoria' : ' categorias'}
         </strong>
         <Link to="/categories/new">Criar categoria</Link>
       </CreateRecordHeader>
@@ -81,7 +81,7 @@ export default function Categories() {
               <strong>{category.name}</strong>
               <span>
                 {category.contacts_count}
-                {category.contacts_count > 1 || category.contacts_count === 0 ? ' contatos' : ' contato'}
+                {category.contacts_count === 1 ? ' contato' : ' contatos'}
               </span>
             </div>
             <div className="actions">

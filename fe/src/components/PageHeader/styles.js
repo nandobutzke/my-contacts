@@ -3,9 +3,14 @@ import styled from 'styled-components';
 export const Container = styled.div`
   margin-bottom: 24px;
 
-  a {
+  button {
     display: flex;
     align-items: center;
+
+    background: transparent;
+    border: none;
+
+    font-size: 16px;
 
     text-decoration: none;
 
@@ -14,10 +19,10 @@ export const Container = styled.div`
       font-weight: bold;
     }
 
-    gap: 8px;
 
     img {
       transform: rotate(-90deg);
+      margin-right: 8px;
     }
   }
 

@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import NewContact from './pages/NewContact';
 import EditContact from './pages/EditContact';
 import Categories from './pages/Categories';
+import NewCategory from './pages/NewCategory';
 
 export default function Routes() {
   return (
@@ -12,7 +13,8 @@ export default function Routes() {
       <Route path="/contacts/new" component={NewContact} />
       <Route path="/contacts/edit/:id" component={EditContact} />
 
-      <Route path="/categories" component={Categories} />
+      <Route path="/categories" exact component={Categories} />
+      <Route path="/categories/new" component={NewCategory} />
     </Switch>
   );
 }

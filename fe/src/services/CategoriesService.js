@@ -5,8 +5,14 @@ class CategoriesService {
     this.httpClient = new HttpClient('http://localhost:3333');
   }
 
-  listCategories(orderBy) {
+  listCategories(orderBy = 'asc') {
     return this.httpClient.get(`/categories?orderBy=${orderBy}`);
+  }
+
+  createCategory(category) {
+    return this.httpClient.post('/categories', {
+      body: category,
+    });
   }
 }
 
