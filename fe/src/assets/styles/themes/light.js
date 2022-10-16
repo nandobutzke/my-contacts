@@ -4,7 +4,7 @@ export default {
   logoColor: '#222222',
   inputColor: '#FFFFFF',
   sideBarBackgroundColor: '#F6F5FC',
-  contactCardBackground: '#FFFFFF',
+  cardBackground: '#FFFFFF',
   categorySmallBackground: '#E0E3FF',
   categorySmallColor: '#5061FC',
   overlayColor: 'rgba(246, 245, 252, 0.8)',

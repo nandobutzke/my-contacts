@@ -1,11 +1,11 @@
-/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable no-nested-ternary */
+/* eslint-disable react/jsx-one-expression-per-line */
 import { Link } from 'react-router-dom';
 import {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
 import {
-  Container, Header, ListContainer, Card,
+  Container, Card,
   ErrorContainer, EmptyListContainer, SearchNotFoundContainer,
 } from './styles';
 
@@ -25,6 +25,8 @@ import formatPhone from '../../utils/formatPhone';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import InputSearch from '../../components/InputSearch';
+import CreateRecordHeader from '../../components/CreateRecordHeader';
+import ListContainer from '../../components/ListContainer';
 
 export default function Home() {
   const [contacts, setContacts] = useState([]);
@@ -126,7 +128,7 @@ export default function Home() {
         />
       )}
 
-      <Header
+      <CreateRecordHeader
         justifyContent={(
           hasError
             ? 'flex-end'
@@ -141,8 +143,8 @@ export default function Home() {
             {filteredContacts.length === 1 ? ' contato' : ' contatos'}
           </strong>
         )}
-        <Link to="/new-contact">Criar contato</Link>
-      </Header>
+        <Link to="/contacts/new">Criar contato</Link>
+      </CreateRecordHeader>
 
       {hasError && (
         <ErrorContainer>
@@ -197,7 +199,7 @@ export default function Home() {
                 </div>
 
                 <div className="actions">
-                  <Link to={`/edit-contact/${contact.id}`}>
+                  <Link to={`/contacts/edit/${contact.id}`}>
                     <img src={edit} alt="Edit" />
                   </Link>
                   <button type="button" onClick={() => handleOpenDeleteModal(contact)}>
@@ -209,9 +211,7 @@ export default function Home() {
 
           </ListContainer>
         </>
-
       )}
-
     </Container>
   );
 }

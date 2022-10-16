@@ -4,78 +4,8 @@ export const Container = styled.div`
   margin-top: 32px;
 `;
 
-export const Header = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: ${({ justifyContent }) => justifyContent};
-  padding-bottom: 16px;
-
-  border-bottom: 2px solid ${({ theme }) => theme.mode.headerBorderBottomColor};
-
-  margin-top: 32px;
-
-  transition: all 0.2s ease-in;
-
-  strong {
-    color: ${({ theme }) => theme.mode.textColor};
-
-    font-size: 24px;
-
-    transition: color 0.2s ease-in;
-  }
-
-  a {
-    color: ${({ theme }) => theme.colors.primary.main};
-    text-decoration: none;
-    font-weight: bold;
-
-    border: 2px solid ${({ theme }) => theme.colors.primary.main};
-    border-radius: 4px;
-
-    padding: 8px 16px;
-
-    transition: all 0.2s ease-in;
-
-    &:hover {
-      background-color: #5061FC;
-      color: ${({ theme }) => theme.colors.white};
-    }
-  }
-`;
-
-export const ListContainer = styled.div`
-  margin-top: 24px;
-  margin-bottom: 16px;
-
-  header {
-    margin-bottom: 16px;
-
-    button {
-      background: none;
-      border: none;
-
-      display: flex;
-      align-items: center;
-
-      font-size: 16px;
-      font-weight: bold;
-
-      gap: 8px;
-
-      span {
-        color: ${({ theme }) => theme.colors.primary.main};
-      }
-
-      img {
-        transform: ${({ orderBy }) => (orderBy === 'asc' ? 'rotate(180deg)' : 'rotate(0deg)')};
-        transition: transform 0.2s ease-in;
-      }
-    }
-  }
-`;
-
 export const Card = styled.div`
-  background: ${({ theme }) => theme.mode.contactCardBackground};
+  background: ${({ theme }) => theme.mode.cardBackground};
   color: ${({ theme }) => theme.mode.textColor};
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.04);
   padding: 16px;
@@ -123,10 +53,9 @@ export const Card = styled.div`
     display: flex;
     align-items: center;
 
-    gap: 8px;
-
     button {
       background: transparent;
+      margin-left: 8px;
 
       border: none;
     }
