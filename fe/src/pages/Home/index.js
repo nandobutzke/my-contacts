@@ -6,7 +6,6 @@ import {
 } from 'react';
 import {
   Container, Card,
-  ErrorContainer, EmptyListContainer, SearchNotFoundContainer,
 } from './styles';
 
 import Loader from '../../components/Loader';
@@ -14,7 +13,6 @@ import Loader from '../../components/Loader';
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
-import sad from '../../assets/images/sad.svg';
 import emptyBox from '../../assets/images/empty-box.svg';
 import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 
@@ -22,11 +20,13 @@ import ContactsService from '../../services/ContactsService';
 import toast from '../../utils/toast';
 import formatPhone from '../../utils/formatPhone';
 
-import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import InputSearch from '../../components/InputSearch';
 import CreateRecordHeader from '../../components/CreateRecordHeader';
 import ListContainer from '../../components/ListContainer';
+import LoadErrorMessage from '../../components/LoadErrorMessage';
+import EmptyListContainer from '../../components/EmptyListContainer';
+import SearchNotFoundContainer from '../../components/SearchNotFoundContainer';
 
 export default function Home() {
   const [contacts, setContacts] = useState([]);
@@ -63,6 +63,10 @@ export default function Home() {
 
   function handleOrderBy() {
     setOrderBy((prevState) => (prevState === 'asc' ? 'desc' : 'asc'));
+  }
+
+  function handleTryAgain() {
+    loadContacts();
   }
 
   function handleChangeSearch(event) {
@@ -147,13 +151,9 @@ export default function Home() {
       </CreateRecordHeader>
 
       {hasError && (
-        <ErrorContainer>
-          <img src={sad} alt="Error Sad Face" />
-          <div>
-            <span>Ocorreu um erro ao obter os seus contatos!</span>
-            <Button onClick={() => loadContacts()}>Tentar novamente</Button>
-          </div>
-        </ErrorContainer>
+        <LoadErrorMessage onTryAgain={handleTryAgain}>
+          Ocorreu um erro ao obter os seus contatos!
+        </LoadErrorMessage>
       )}
 
       {!hasError && (

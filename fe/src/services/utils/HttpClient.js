@@ -1,4 +1,5 @@
 import APIError from '../../errors/APIError';
+import delay from '../../utils/delay';
 
 class HttpClient {
   constructor(baseUrl) {
@@ -6,6 +7,7 @@ class HttpClient {
   }
 
   async get(path) {
+    await delay(1500);
     return this.makeRequest(path, {
       method: 'GET',
     });
@@ -28,6 +30,8 @@ class HttpClient {
   }
 
   async delete(path, options) {
+    await delay(1000);
+
     return this.makeRequest(path, {
       method: 'DELETE',
       headers: options?.headers,

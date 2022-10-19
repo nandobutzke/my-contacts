@@ -9,10 +9,18 @@ class CategoriesService {
     return this.httpClient.get(`/categories?orderBy=${orderBy}`);
   }
 
+  getCategoryById(id) {
+    return this.httpClient.get(`/categories/${id}`);
+  }
+
   createCategory(category) {
     return this.httpClient.post('/categories', {
       body: category,
     });
+  }
+
+  deleteCategory(id) {
+    return this.httpClient.delete(`/categories/${id}`);
   }
 }
 
