@@ -19,6 +19,12 @@ class CategoriesService {
     });
   }
 
+  updateCategory(id, category) {
+    return this.httpClient.put(`/categories/${id}`, {
+      body: category,
+    });
+  }
+
   deleteCategory(id) {
     return this.httpClient.delete(`/categories/${id}`);
   }

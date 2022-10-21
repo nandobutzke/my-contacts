@@ -54,12 +54,18 @@ class CategoryRepository {
   }
 
   async delete(id) {
+    await db.query(`
+        UPDATE contacts
+        SET category_id = null
+        WHERE category_id = $1
+    `, [id]);
+
     const deleteOp = await db.query(`
         DELETE FROM categories
         WHERE id = $1
     `, [id]);
 
-    return deleteOp;
+    return [deleteOp];
   }
 }
 
