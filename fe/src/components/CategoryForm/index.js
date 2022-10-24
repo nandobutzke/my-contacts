@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button';
 import FormGroup from '../FormGroup';
@@ -6,8 +6,8 @@ import Input from '../Input';
 import { ButtonContainer, Form } from './styles';
 import useErrors from '../../hooks/useErrors';
 
-const CategoryForm = forwardRef(({ buttonLabel, onSubmit }) => {
-  const [name, setName] = useState('');
+export default function CategoryForm({ buttonLabel, onSubmit, category }) {
+  const [name, setName] = useState(category.name ?? '');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { setError, removeError, getMessageByFieldName } = useErrors();
@@ -54,11 +54,14 @@ const CategoryForm = forwardRef(({ buttonLabel, onSubmit }) => {
       </ButtonContainer>
     </Form>
   );
-});
+}
 
 CategoryForm.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  category: PropTypes.shape(),
 };
 
-export default CategoryForm;
+CategoryForm.defaultProps = {
+  category: {},
+};

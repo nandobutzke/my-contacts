@@ -11,14 +11,16 @@ export default function EditCategory() {
   const history = useHistory();
 
   const [categoryName, setCategoryName] = useState('');
+  const [category, setCategory] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function loadCategory() {
       try {
-        const { name } = await CategoriesService.getCategoryById(id);
+        const categoryData = await CategoriesService.getCategoryById(id);
 
-        setCategoryName(name);
+        setCategory(categoryData);
+        setCategoryName(categoryData.name);
         setIsLoading(false);
       } catch {
         history.push('/categories');
@@ -37,11 +39,6 @@ export default function EditCategory() {
       const { name } = await CategoriesService.updateCategory(id, formData);
 
       setCategoryName(name);
-
-      toast({
-        type: 'success',
-        text: 'O nome da categoria foi alterado com sucesso!',
-      });
     } catch {
       toast({
         type: 'danger',
@@ -60,11 +57,13 @@ export default function EditCategory() {
     <>
       <Loader isLoading={isLoading} />
 
-      <PageHeader title={`Editar ${categoryName}`} />
+      <PageHeader title={isLoading ? 'Carregando...' : `Editar ${categoryName}`} />
 
       <CategoryForm
+        key={category.id}
         buttonLabel="Salvar alterações"
         onSubmit={handleSubmit}
+        category={category}
       />
     </>
   );
