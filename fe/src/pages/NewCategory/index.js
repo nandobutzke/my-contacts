@@ -11,6 +11,8 @@ export default function NewCategory() {
     try {
       await CategoriesService.createCategory(formData);
 
+      categoryFormRef.current.resetValues();
+
       toast({
         type: 'success',
         text: 'A categoria foi cadastrada com sucesso!',

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useImperativeHandle, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button';
 import FormGroup from '../FormGroup';
@@ -6,8 +6,8 @@ import Input from '../Input';
 import { ButtonContainer, Form } from './styles';
 import useErrors from '../../hooks/useErrors';
 
-export default function CategoryForm({ buttonLabel, onSubmit, category }) {
-  const [name, setName] = useState(category.name ?? '');
+const CategoryForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
+  const [name, setName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { setError, removeError, getMessageByFieldName } = useErrors();
@@ -34,6 +34,15 @@ export default function CategoryForm({ buttonLabel, onSubmit, category }) {
     setIsSubmitting(false);
   }
 
+  useImperativeHandle(ref, () => ({
+    setFieldValues: (contact) => (
+      setName(contact.name ?? '')
+    ),
+    resetValues: () => (
+      setName('')
+    ),
+  }), []);
+
   return (
     <Form onSubmit={handleSubmit} noValidate>
       <FormGroup error={getMessageByFieldName('name')}>
@@ -54,14 +63,11 @@ export default function CategoryForm({ buttonLabel, onSubmit, category }) {
       </ButtonContainer>
     </Form>
   );
-}
+});
 
 CategoryForm.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  category: PropTypes.shape(),
 };
 
-CategoryForm.defaultProps = {
-  category: {},
-};
+export default CategoryForm;

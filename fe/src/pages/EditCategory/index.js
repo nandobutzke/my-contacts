@@ -1,5 +1,5 @@
 import { useHistory, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import PageHeader from '../../components/PageHeader';
 import CategoryForm from '../../components/CategoryForm';
 import CategoriesService from '../../services/CategoriesService';
@@ -10,8 +10,10 @@ export default function EditCategory() {
   const { id } = useParams();
   const history = useHistory();
 
+  const categoryFormRef = useRef();
+
   const [categoryName, setCategoryName] = useState('');
-  const [category, setCategory] = useState({});
+
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -19,7 +21,8 @@ export default function EditCategory() {
       try {
         const categoryData = await CategoriesService.getCategoryById(id);
 
-        setCategory(categoryData);
+        categoryFormRef.current.setFieldValues(categoryData);
+
         setCategoryName(categoryData.name);
         setIsLoading(false);
       } catch {
@@ -60,10 +63,9 @@ export default function EditCategory() {
       <PageHeader title={isLoading ? 'Carregando...' : `Editar ${categoryName}`} />
 
       <CategoryForm
-        key={category.id}
+        ref={categoryFormRef}
         buttonLabel="Salvar alterações"
         onSubmit={handleSubmit}
-        category={category}
       />
     </>
   );
