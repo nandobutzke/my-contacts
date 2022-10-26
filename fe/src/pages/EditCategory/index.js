@@ -22,7 +22,6 @@ export default function EditCategory() {
         const categoryData = await CategoriesService.getCategoryById(id);
 
         categoryFormRef.current.setFieldValues(categoryData);
-
         setCategoryName(categoryData.name);
         setIsLoading(false);
       } catch {
@@ -48,7 +47,6 @@ export default function EditCategory() {
         text: 'Ocorreu um erro ao editar o nome da categoria!',
       });
     } finally {
-      history.push('/categories');
       toast({
         type: 'success',
         text: 'O nome da categoria foi alterado com sucesso!',

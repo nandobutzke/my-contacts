@@ -1,4 +1,6 @@
-import { useState, useImperativeHandle, forwardRef } from 'react';
+import {
+  useState, useImperativeHandle, forwardRef,
+} from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button';
 import FormGroup from '../FormGroup';
