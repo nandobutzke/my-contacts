@@ -53,7 +53,7 @@ const CategoryForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
           placeholder="Nome *"
           value={name}
           onChange={handleNameChange}
-          disbled={isSubmitting}
+          disabled={isSubmitting}
         />
       </FormGroup>
       <ButtonContainer>
