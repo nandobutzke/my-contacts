@@ -14,6 +14,7 @@ export const Container = styled.div`
   height: 100vh;
   padding: 16px;
   width: 75%;
+  max-width: 500px;
 
   background: ${({ theme }) => theme.mode.sideBarBackgroundColor};
 

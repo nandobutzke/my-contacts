@@ -59,7 +59,8 @@ const CategoryForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
       <ButtonContainer>
         <Button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || !name}
+          isLoading={isSubmitting}
         >
           {buttonLabel}
         </Button>
