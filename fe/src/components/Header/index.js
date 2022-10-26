@@ -1,7 +1,5 @@
 import { Container, Svg } from './styles';
 
-// import logo from '../../assets/images/mycontacts-logo.svg';
-
 export function Header() {
   return (
     <Container>

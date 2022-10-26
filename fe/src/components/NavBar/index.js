@@ -8,7 +8,7 @@ import SideBar from '../SideBar';
 import ToggleThemeButton from '../ToggleThemeButton';
 import { Container } from './styles';
 
-export default function NavBar({ onToggleTheme }) {
+export default function NavBar({ theme, onToggleTheme }) {
   const [openSideBar, setOpenSideBar] = useState(false);
   const location = useLocation();
 
@@ -23,7 +23,7 @@ export default function NavBar({ onToggleTheme }) {
   return (
     <Container>
       <AiOutlineMenu size={32} onClick={handleShowSideBar} />
-      <ToggleThemeButton onToggleTheme={onToggleTheme} />
+      <ToggleThemeButton theme={theme} onToggleTheme={onToggleTheme} />
 
       {openSideBar && <SideBar onShowSideBar={handleShowSideBar} />}
     </Container>
@@ -31,5 +31,6 @@ export default function NavBar({ onToggleTheme }) {
 }
 
 NavBar.propTypes = {
+  theme: PropTypes.string.isRequired,
   onToggleTheme: PropTypes.func.isRequired,
 };

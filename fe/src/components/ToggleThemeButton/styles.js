@@ -9,8 +9,8 @@ export const Container = styled.div`
   label {
     display: flex;
 
-    width: 35px;
-    height: 20px;
+    width: 45px;
+    height: 25px;
     background: ${({ theme }) => theme.colors.primary.main};
     position: relative;
     border-radius: 50px;
@@ -21,8 +21,12 @@ export const Container = styled.div`
   }
 
   .toggle-ball {
-    width: 15px;
-    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 20px;
+    height: 20px;
     background-color: white;
     position: absolute;
     top: 2px;
@@ -32,6 +36,6 @@ export const Container = styled.div`
   }
 
   .checkbox:checked + label .toggle-ball {
-    transform: translateX(16px);
+    transform: translateX(20px);
   }
 `;

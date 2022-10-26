@@ -31,7 +31,10 @@ function App() {
         <Container>
           <ToastContainer />
 
-          <NavBar onToggleTheme={handleToggleTheme} />
+          <NavBar
+            theme={theme}
+            onToggleTheme={handleToggleTheme}
+          />
           <Header />
           <Routes />
         </Container>
