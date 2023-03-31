@@ -1,3 +1,4 @@
+import CategoryMapper from './mappers/CategoryMapper';
 import HttpClient from './utils/HttpClient';
 
 class CategoriesService {
@@ -5,8 +6,10 @@ class CategoriesService {
     this.httpClient = new HttpClient('http://localhost:3333');
   }
 
-  listCategories(orderBy = 'asc') {
-    return this.httpClient.get(`/categories?orderBy=${orderBy}`);
+  async listCategories(orderBy = 'asc') {
+    const categories = await this.httpClient.get(`/categories?orderBy=${orderBy}`);
+
+    return categories.map(CategoryMapper.toDomain);
   }
 
   getCategoryById(id) {
@@ -14,14 +17,18 @@ class CategoriesService {
   }
 
   createCategory(category) {
+    const body = CategoryMapper.toPersistence(category);
+
     return this.httpClient.post('/categories', {
-      body: category,
+      body,
     });
   }
 
   updateCategory(id, category) {
+    const body = CategoryMapper.toPersistence(category);
+
     return this.httpClient.put(`/categories/${id}`, {
-      body: category,
+      body,
     });
   }
 
