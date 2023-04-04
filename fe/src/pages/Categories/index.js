@@ -3,25 +3,19 @@
 import {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
-import { Link } from 'react-router-dom';
-import InputSearch from '../../components/InputSearch';
-import ListContainer from '../../components/ListContainer';
-import CreateRecordHeader from '../../components/CreateRecordHeader';
-import { Card } from './styles';
 
-import edit from '../../assets/images/icons/edit.svg';
-import trash from '../../assets/images/icons/trash.svg';
-import arrow from '../../assets/images/icons/arrow.svg';
-import emptyBox from '../../assets/images/empty-box.svg';
-import magnifierQuestion from '../../assets/images/magnifier-question.svg';
+import InputSearch from '../../components/InputSearch';
+
+import CreateRecordHeader from '../../components/CreateRecordHeader';
 
 import CategoriesService from '../../services/CategoriesService';
 import Modal from '../../components/Modal';
 import toast from '../../utils/toast';
 import Loader from '../../components/Loader';
-import LoadErrorMessage from '../../components/LoadErrorMessage';
-import EmptyListContainer from '../../components/EmptyListContainer';
-import SearchNotFoundContainer from '../../components/SearchNotFoundContainer';
+import StatusError from '../../components/StatusError';
+import EmptyList from '../../components/EmptyList';
+import SearchNotFound from '../../components/SearchNotFound';
+import CategoriesList from './CategoriesList';
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
@@ -111,70 +105,44 @@ export default function Categories() {
     <>
       <Loader isLoading={isLoading} />
 
-      <Modal
-        danger
-        visible={isModalVisible}
-        isLoading={isLoadingDeleteAction}
-        title="Tem certeza que deseja remover a categoria ”Teste”?"
-        onCancel={handleCloseDeleteCategoryModal}
-        onConfirm={handleDeleteCategory}
-      >
-        Esta ação não poderá ser desfeita!
-      </Modal>
-
       {categories.length > 0 && (
         <InputSearch
-          searchTerm={searchTerm}
-          handleChangeSearch={handleChangeSearch}
+          value={searchTerm}
+          onChange={handleChangeSearch}
         />
       )}
 
       <CreateRecordHeader
-        justifyContent={(
-        hasError
-          ? 'flex-end'
-          : (categories.length > 0
-            ? 'space-between'
-            : 'center')
-          )}
-      >
-        {(filteredCategories.length > 0 && !isLoading) && (
-        <strong>
-          {filteredCategories.length}
-          {filteredCategories.length === 1 ? ' categoria' : ' categorias'}
-        </strong>
-        )}
-        <Link to="/categories/new">Criar categoria</Link>
-      </CreateRecordHeader>
+        hasError={hasError}
+        qtyOfRecords={categories.length}
+        qtyOfFilteredRecords={filteredCategories.length}
+        recordLink="/categories"
+        recordType="categoria"
+      />
 
       {hasError && (
-        <LoadErrorMessage onTryAgain={handleTryAgain}>
+        <StatusError onTryAgain={handleTryAgain}>
           Ocorreu um erro ao obter as suas categorias!
-        </LoadErrorMessage>
+        </StatusError>
       )}
 
       {!hasError && (
         <>
           {(categories.length < 1 && !isLoading) && (
-            <EmptyListContainer>
-              <img src={emptyBox} alt="Empty Box" />
+            <EmptyList>
               <p>
                 Você ainda não tem nenhuma categoria cadastrada!
                 Clique no botão <strong>”Criar categoria”</strong> à cima para cadastrar
                 a primeira!
               </p>
-            </EmptyListContainer>
+            </EmptyList>
           )}
 
           {(categories.length > 0 && filteredCategories.length < 1) && (
-            <SearchNotFoundContainer>
-              <img src={magnifierQuestion} alt="Search not found" />
-
-              <span>Nenhum resultado foi encontrado para <strong>”{searchTerm}”</strong>.</span>
-            </SearchNotFoundContainer>
+            <SearchNotFound searchTerm={searchTerm} />
           )}
 
-          <ListContainer orderBy={orderBy}>
+          {/* <ListContainer orderBy={orderBy}>
             {filteredCategories.length > 0 && (
               <header>
                 <button type="button" onClick={handleOrderBy}>
@@ -203,7 +171,25 @@ export default function Categories() {
                 </div>
               </Card>
             ))}
-          </ListContainer>
+          </ListContainer> */}
+
+          <CategoriesList
+            orderBy={orderBy}
+            filteredCategories={filteredCategories}
+            onOrderBy={handleOrderBy}
+            onOpenDeleteCategoryModal={handleOpenDeleteCategoryModal}
+          />
+
+          <Modal
+            danger
+            visible={isModalVisible}
+            isLoading={isLoadingDeleteAction}
+            title="Tem certeza que deseja remover a categoria ”Teste”?"
+            onCancel={handleCloseDeleteCategoryModal}
+            onConfirm={handleDeleteCategory}
+          >
+            Esta ação não poderá ser desfeita!
+          </Modal>
         </>
       )}
     </>

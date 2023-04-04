@@ -3,6 +3,7 @@ class CategoryMapper {
     return {
       id: persistenceCategory.id,
       name: persistenceCategory.name,
+      contacts_count: Number(persistenceCategory.contacts_count),
     };
   }
 

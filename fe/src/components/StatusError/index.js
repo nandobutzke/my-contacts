@@ -4,7 +4,7 @@ import Button from '../Button';
 import sad from '../../assets/images/sad.svg';
 import { Container } from './styles';
 
-export default function LoadErrorMessage({ onTryAgain, children }) {
+export default function StatusError({ onTryAgain, children }) {
   return (
     <Container>
       <img src={sad} alt="Error Sad Face" />
@@ -16,7 +16,7 @@ export default function LoadErrorMessage({ onTryAgain, children }) {
   );
 }
 
-LoadErrorMessage.propTypes = {
+StatusError.propTypes = {
   onTryAgain: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
 };

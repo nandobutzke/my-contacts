@@ -1,20 +1,20 @@
 import PropTypes from 'prop-types';
 import { Container } from './styles';
 
-export default function InputSearch({ searchTerm, handleChangeSearch }) {
+export default function InputSearch({ value, onChange }) {
   return (
     <Container>
       <input
-        value={searchTerm}
+        value={value}
         type="text"
         placeholder="Pesquise pelo nome..."
-        onChange={handleChangeSearch}
+        onChange={onChange}
       />
     </Container>
   );
 }
 
 InputSearch.propTypes = {
-  searchTerm: PropTypes.string.isRequired,
-  handleChangeSearch: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
