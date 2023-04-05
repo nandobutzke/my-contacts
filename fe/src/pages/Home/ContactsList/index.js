@@ -59,7 +59,7 @@ ContactsList.propTypes = {
     email: PropTypes.string,
     phone: PropTypes.string,
     category: PropTypes.shape({
-      name: PropTypes.string.isRequired,
+      name: PropTypes.string,
     }),
   })).isRequired,
   onOrderBy: PropTypes.func.isRequired,

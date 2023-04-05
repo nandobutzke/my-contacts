@@ -33,11 +33,15 @@ export default function Home() {
     handleOrderBy,
   } = useHome();
 
+  const hasContacts = contacts.length > 0;
+  const isListEmpty = !hasError && (!hasContacts && !isLoading);
+  const isSearchEmpty = !hasError && (hasContacts && filteredContacts.length < 1);
+
   return (
     <Container>
       <Loader isLoading={isLoading} />
 
-      {contacts.length > 0 && (
+      {hasContacts && (
         <InputSearch
           value={searchTerm}
           onChange={handleChangeSearch}
@@ -58,56 +62,20 @@ export default function Home() {
         </StatusError>
       )}
 
-      {!hasError && (
+      {isListEmpty && (
+        <EmptyList>
+          <p>
+            Você ainda não tem nenhum contato cadastrado!
+            Clique no botão <strong>”Novo contato”</strong> à cima para cadastrar
+            o seu primeiro!
+          </p>
+        </EmptyList>
+      )}
+
+      {isSearchEmpty && <SearchNotFound searchTerm={searchTerm} />}
+
+      {hasContacts && (
         <>
-          {(contacts.length < 1 && !isLoading) && (
-            <EmptyList>
-              <p>
-                Você ainda não tem nenhum contato cadastrado!
-                Clique no botão <strong>”Novo contato”</strong> à cima para cadastrar
-                o seu primeiro!
-              </p>
-            </EmptyList>
-          )}
-
-          {(contacts.length > 0 && filteredContacts.length < 1) && (
-            <SearchNotFound searchTerm={searchTerm} />
-          )}
-
-          {/* <ListContainer orderBy={orderBy}>
-            {filteredContacts.length > 0 && (
-            <header>
-              <button type="button" onClick={handleOrderBy}>
-                <span>Nome</span>
-                <img src={arrow} alt="Arrow" />
-              </button>
-            </header>
-            )}
-
-            {filteredContacts.map((contact) => (
-              <Card key={contact.id}>
-                <div className="info">
-                  <div className="contact-name">
-                    <strong>{contact.name}</strong>
-                    {contact.category.name && <small>{contact.category.name}</small>}
-                  </div>
-                  <span>{contact.email}</span>
-                  <span>{formatPhone(contact.phone)}</span>
-                </div>
-
-                <div className="actions">
-                  <Link to={`/contacts/edit/${contact.id}`}>
-                    <img src={edit} alt="Edit" />
-                  </Link>
-                  <button type="button" onClick={() => handleOpenDeleteModal(contact)}>
-                    <img src={trash} alt="Trash" />
-                  </button>
-                </div>
-              </Card>
-            ))}
-
-          </ListContainer> */}
-
           <ContactsList
             orderBy={orderBy}
             filteredContacts={filteredContacts}
