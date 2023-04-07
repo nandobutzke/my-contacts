@@ -4,20 +4,22 @@ import useToastContainer from './useToastContainer';
 
 export function ToastContainer() {
   const {
-    messages,
-    handleRemoveToast,
+    handleRemoveMessage,
+    handleAnimationEnd,
+    renderList,
   } = useToastContainer();
 
   return (
     <Container>
-      {messages.map((message) => (
+      {renderList((message, { isLeaving }) => (
         <ToastMessage
           key={message.id}
           message={message}
-          onRemoveToast={handleRemoveToast}
+          onRemoveToast={handleRemoveMessage}
+          isLeaving={isLeaving}
+          onAnimationEnd={handleAnimationEnd}
         />
       ))}
-
     </Container>
   );
 }
