@@ -6,7 +6,6 @@ export default function useToastContainer() {
   const {
     setItems: setMessages,
     handleRemoveItem: handleRemoveMessage,
-    handleAnimationEnd,
     renderList,
   } = useAnimatedList();
 
@@ -28,7 +27,6 @@ export default function useToastContainer() {
 
   return {
     handleRemoveMessage,
-    handleAnimationEnd,
     renderList,
   };
 }
