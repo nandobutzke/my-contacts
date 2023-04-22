@@ -26,7 +26,7 @@ export default function CreateRecordHeader({
       {(!hasError && qtyOfRecords > 0) && (
       <strong>
         {qtyOfFilteredRecords}
-        {qtyOfFilteredRecords === 1 ? ' contato' : ' contatos'}
+        {qtyOfFilteredRecords === 1 ? ` ${recordType}` : ` ${recordType}s`}
       </strong>
       )}
       <Link to={`${recordLink}/new`}>Criar {recordType}</Link>

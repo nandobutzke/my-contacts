@@ -8,7 +8,7 @@ import GlobalStyle from '../../assets/styles/global';
 import { Container } from './styles';
 import { Header } from '../Header';
 
-import Routes from '../../Routes';
+import Router from '../../Router';
 import { ToastContainer } from '../Toast/ToastContainer';
 import NavBar from '../NavBar';
 
@@ -36,7 +36,7 @@ function App() {
             onToggleTheme={handleToggleTheme}
           />
           <Header />
-          <Routes />
+          <Router />
         </Container>
       </BrowserRouter>
     </ThemeProvider>

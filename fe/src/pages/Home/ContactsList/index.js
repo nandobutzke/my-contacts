@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { memo } from 'react';
 
 import { Link } from 'react-router-dom';
 import formatPhone from '../../../utils/formatPhone';
@@ -8,7 +9,7 @@ import arrow from '../../../assets/images/icons/arrow.svg';
 import edit from '../../../assets/images/icons/edit.svg';
 import trash from '../../../assets/images/icons/trash.svg';
 
-export default function ContactsList({
+function ContactsList({
   orderBy,
   filteredContacts,
   onOrderBy,
@@ -65,3 +66,5 @@ ContactsList.propTypes = {
   onOrderBy: PropTypes.func.isRequired,
   onOpenDeleteModal: PropTypes.func.isRequired,
 };
+
+export default memo(ContactsList);

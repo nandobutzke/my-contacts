@@ -1,4 +1,4 @@
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import PageHeader from '../../components/PageHeader';
 import CategoryForm from '../../components/CategoryForm';
@@ -8,7 +8,6 @@ import Loader from '../../components/Loader';
 
 export default function EditCategory() {
   const { id } = useParams();
-  const history = useHistory();
 
   const categoryFormRef = useRef();
 
@@ -25,7 +24,7 @@ export default function EditCategory() {
         setCategoryName(categoryData.name);
         setIsLoading(false);
       } catch {
-        history.push('/categories');
+        // history.push('/categories');
         toast({
           type: 'danger',
           text: 'A categoria não foi encontrada!',
@@ -34,7 +33,7 @@ export default function EditCategory() {
     }
 
     loadCategory();
-  }, [id, history]);
+  }, [id]);
 
   async function handleSubmit(formData) {
     try {

@@ -1,13 +1,13 @@
-import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import arrow from '../../assets/images/icons/arrow.svg';
 import { Container } from './styles';
 
 export default function PageHeader({ title }) {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function handleGoBack() {
-    history.goBack();
+    navigate(-1);
   }
 
   return (

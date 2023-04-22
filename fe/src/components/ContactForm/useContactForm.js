@@ -1,4 +1,5 @@
 import {
+  useCallback,
   useEffect, useImperativeHandle, useState,
 } from 'react';
 
@@ -21,19 +22,31 @@ export default function useContactForm(ref, onSubmit) {
     errors, setError, removeError, getMessageByFieldName,
   } = useErrors();
 
-  useEffect(() => {
-    async function loadCategories() {
-      try {
-        const categoriesList = await CategoriesService.listCategories();
+  const loadCategories = useCallback(async (signal) => {
+    try {
+      const categoriesList = await CategoriesService.listCategories(signal);
 
-        setCategories(categoriesList);
-      } catch {} finally {
-        setIsLoadingCategories(false);
+      setCategories(categoriesList);
+    } catch (error) {
+      if (error instanceof DOMException && error.name === 'AbortError') {
+        return;
       }
+    } finally {
+      setIsLoadingCategories(false);
     }
-
-    loadCategories();
   }, [setCategories, setIsLoadingCategories]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    loadCategories(controller.signal);
+
+    return () => {
+      controller.abort();
+      console.log(controller.signal);
+      console.log('aborted');
+    };
+  }, [loadCategories]);
 
   useImperativeHandle(ref, () => ({
     setFieldValues: (contact) => {

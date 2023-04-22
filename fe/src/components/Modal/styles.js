@@ -34,7 +34,7 @@ export const Overlay = styled.div`
   opacity: 0;
   animation: ${fadeIn} 0.3s forwards;
 
-  ${({ isLeaving }) => isLeaving && css` animation: ${fadeOut} 0.2s; `}
+  ${({ isLeaving }) => isLeaving && css` animation: ${fadeOut} 0.2s forwards; `}
 `;
 
 export const Container = styled.div`

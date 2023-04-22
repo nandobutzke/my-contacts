@@ -3,7 +3,7 @@ import Spinner from '../Spinner';
 
 import { Container } from './styles';
 
-export default function FormGroup({ children, error, isLoading }) {
+export default function FormGroup({ children, error = '', isLoading = false }) {
   return (
     <Container>
       {children}
@@ -19,9 +19,4 @@ FormGroup.propTypes = {
   children: PropTypes.node.isRequired,
   error: PropTypes.string,
   isLoading: PropTypes.bool,
-};
-
-FormGroup.defaultProps = {
-  error: '',
-  isLoading: false,
 };
